@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Django
+db.sqlite3
+.env
+.env.*
+*.log
+staticfiles/
+media/
+local_settings.py
+
+# Virtualenv
+venv/
+env/
+ENV/
+*.swp
+school-virtual/
+
+# VSCode / IDEs
+.vscode/
+.idea/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Bytecode
+*.pyc
+
+# Node (if you use React or frontend in same repo)
+node_modules/
+build/
+dist/
+
+# Deployment
+*.bak
