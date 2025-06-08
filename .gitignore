@@ -22,7 +22,7 @@ venv/
 env/
 ENV/
 *.swp
-school-virtual/
+# school-virtual/
 
 # VSCode / IDEs
 .vscode/
