@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -100,12 +100,12 @@ WSGI_APPLICATION = 'school_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': config('DATABASE_ENGINE'),
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': config('DATABASE_ENGINE'),
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 DATABASES = {
     'default': {
@@ -168,7 +168,7 @@ MPESA_CONSUMER_SECRET = config('MPESA_CONSUMER_SECRET')
 MPESA_SHORTCODE = config('MPESA_SHORTCODE')
 MPESA_PASSKEY =  config('MPESA_PASSKEY')
 
-CORS_ALLOW_ALL_ORIGINS = ['https://kingsbridgeacademy.netlify.app/']  
+CORS_ALLOW_ALL_ORIGINS = True  
 FRONTEND_BASE_URL= 'http://localhost:5173/'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # For dev
 DEFAULT_FROM_EMAIL = "noreply@yourapp.com"
