@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://kingsbridge-academy.onrender.com']
+ALLOWED_HOSTS = ['https://kingsbridge-academy.onrender.com', 'kingsbridge-academy.onrender.com']
 
 
 # Application definition
