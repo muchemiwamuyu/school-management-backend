@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer, LoginSerializer, RegisterSchoolStaffSerializer, RegisterStaffSerializer, LoginSerializer
+from .models import RegisterSchoolStaff
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.conf import settings
@@ -73,6 +74,15 @@ def register_school_staff(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# getting all staff
+@api_view(['GET'])
+def school_staff(request):
+    teachers = RegisterSchoolStaff.objects.all()
+    serializer = RegisterSchoolStaffSerializer(teachers, many=True)
+    response = serializer.data
+
+    return Response(response, status=status.HTTP_200_OK)
+    
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

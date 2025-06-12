@@ -1,10 +1,8 @@
 from rest_framework import serializers
 from .models import FaceRegistration
 import base64
-
-import base64
 from rest_framework import serializers
-from .models import FaceRegistration
+
 
 class FaceRegistrationSerializer(serializers.ModelSerializer):
     # Override face_data to accept base64 encoded string
@@ -12,7 +10,7 @@ class FaceRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FaceRegistration
-        fields = ['user', 'face_data', 'registered_at']
+        fields = ['name', 'face_data', 'registered_at']
         read_only_fields = ['registered_at']
 
     def validate_face_data(self, value):

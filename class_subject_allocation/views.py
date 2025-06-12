@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import ClassRegistrationSerializer
-from .models import ClassRegistration
+from .serializers import ClassRegistrationSerializer, DepartmentsSerializer
+from .models import ClassRegistration, Departments
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -9,8 +9,15 @@ from rest_framework.decorators import api_view
 
 @api_view(['POST'])
 def register_class(request):
+    # Check if a class with the same unique fields already exists
+    class_name = request.data.get('class_name')
+    if class_name and ClassRegistration.objects.filter(class_name=class_name).exists():
+        return Response(
+            {"error": "A class with this name already exists."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
     serializer = ClassRegistrationSerializer(data=request.data)
-    
     if serializer.is_valid():
         instance = serializer.save()
         response_data = serializer.data.copy()
@@ -68,3 +75,22 @@ def delete_class(request, class_id):
 
 
 # REMEMBER SUBJECTS FUNCTIONALITIES
+
+
+
+@api_view(['POST'])
+def departments_registration(request):
+    # Check if a department with the same unique fields already exists
+    department_name = request.data.get('department_name')
+    if department_name and Departments.objects.filter(department_name=department_name).exists():
+        return Response(
+            {"error": "A department with this name already exists."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    serializer = DepartmentsSerializer(data=request.data)
+    if serializer.is_valid():
+        instance = serializer.save()
+        response_data = serializer.data.copy()
+        response_data['id'] = instance.id
+        return Response(response_data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

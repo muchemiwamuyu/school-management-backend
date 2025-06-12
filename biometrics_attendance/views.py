@@ -10,19 +10,22 @@ import numpy as np
 import pickle
 from .utils import cosine_similarity
 from .models import FaceRegistration, Attendance
+from rest_framework.authtoken.models import Token
 # Create your views here.
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def register_face(request):
-    # Ensure the user field is always the logged-in user
+    # Ensure the user field is always the logged-in user (if available)
     data = request.data.copy()
-    data['user'] = request.user.id  # set user to request.user
+    if request.user and request.user.is_authenticated:
+        data['user'] = request.user.id  # set user to request.user
 
     serializer = FaceRegistrationSerializer(data=data)
     if serializer.is_valid():
-        serializer.save()  # user is in data, serializer will use it
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer.save()
+        # Generate or get token for the user (optional, can be removed if not needed)
+        response_data = serializer.data
+        return Response(response_data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])

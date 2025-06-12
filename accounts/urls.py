@@ -12,4 +12,5 @@ urlpatterns = [
     path('registerstaff/', Registerstaff, name='registerstaff'),
     path('loginstaff/', LoginStaff, name='login_staff'),
     path('ping/', ping, name='ping'),
+    path('school_staff/', school_staff, name='school_staff')
 ]
