@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import RegisterSchoolStaff, School_Staff
+from .models import RegisterSchoolStaff, School_Staff, DutyRoaster, Meeting
 from django.contrib.auth import authenticate
 
 # Serializers define the API representation.
@@ -45,10 +45,8 @@ class RegisterSchoolStaffSerializer(serializers.ModelSerializer):
         model = RegisterSchoolStaff
         exclude = ['created_by']  # Don't expect it from input
 
-    def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data['created_by'] = user
-        return super().create(validated_data)
+    def __str__(self):
+        return super().__str__()
     
 class RegisterStaffSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True)
@@ -94,6 +92,40 @@ class LoginSerializer(serializers.ModelSerializer):
 
         attrs['user'] = user
         return attrs
+    
+
+class DutyRoasterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DutyRoaster
+        fields = ['staff', 'duty', 'date', 'time']
+
+    def create(self, validated_data):
+        return DutyRoaster.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.staff = validated_data.get('staff', instance.staff)
+        instance.duty = validated_data.get('duty', instance.duty)
+        instance.date = validated_data.get('date', instance.date)
+        instance.time = validated_data.get('time', instance.time)
+        instance.save()
+        return instance
+    
+class MeetingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Meeting
+        fields = ['title', 'agenda', 'description', 'status', 'created_at', 'updated_at']
+
+    def create(self, validated_data):
+        return Meeting.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.agenda = validated_data.get('agenda', instance.agenda)
+        instance.description = validated_data.get('description', instance.description)
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance
+
     
 
 

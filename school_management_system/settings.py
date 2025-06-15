@@ -158,6 +158,15 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# For Gmail (use App Password)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'muchemiedwin68@gmail.com'
+EMAIL_HOST_PASSWORD = 'alwf yvtr qbnl eswz'  # Not your normal password!
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -169,7 +178,7 @@ MPESA_PASSKEY =  config('MPESA_PASSKEY')
 
 CORS_ALLOW_ALL_ORIGINS = True 
 FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:5173")
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # For dev
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # For dev
 DEFAULT_FROM_EMAIL = "noreply@yourapp.com"
 
 # CSRF_COOKIE_SECURE = True
