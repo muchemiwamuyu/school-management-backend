@@ -25,4 +25,5 @@ urlpatterns = [
     path('biometrics/', include('biometrics_attendance.urls')),
     path('students/', include('students_registration.urls')),
     path('finance/', include('finance.urls')),
+    path('parents/', include('parents_stakeholders.urls')),
 ]

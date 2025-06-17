@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'protected_apitests_endpoints',
     'learning_management_system',
     'corsheaders',
+    'parents_stakeholders',
 ]
 
 MIDDLEWARE = [
