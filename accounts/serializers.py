@@ -113,7 +113,7 @@ class DutyRoasterSerializer(serializers.ModelSerializer):
 class MeetingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meeting
-        fields = ['title', 'agenda', 'description', 'status', 'created_at', 'updated_at']
+        fields = ['title', 'agenda', 'description', 'event_date', 'status', 'created_at', 'updated_at']
 
     def create(self, validated_data):
         return Meeting.objects.create(**validated_data)

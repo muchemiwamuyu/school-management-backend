@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 # Create your models here.
 
 User = get_user_model()
@@ -49,6 +50,7 @@ class Meeting(models.Model):
     title = models.CharField(max_length=200)
     agenda = models.TextField()
     description = models.TextField(blank=True, null=True)
+    event_date = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='upcoming')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
